@@ -1,0 +1,8 @@
+mysql:
+  db.options:
+    dbname: mm
+    user: username
+    password: password
+    host: localhost
+    driver: pdo_mysql
+    charset: UTF8

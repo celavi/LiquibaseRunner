@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+set_time_limit(0);
+
+use Ivoba\Silex\Provider\ConsoleServiceProvider;
+
+$app = require_once __DIR__.'/../app/console/bootstrap.php';
+
+$app->register(new ConsoleServiceProvider(), [
+    'console.name'              => 'Liquibase Runner',
+    'console.version'           => '1.0.0',
+    'console.project_directory' => __DIR__.'/..'
+]);
+
+$application = $app['console'];
+$application->run();

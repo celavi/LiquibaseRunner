@@ -1,0 +1,26 @@
+{
+  "name": "celavi/liquibase-runner",
+  "description": "Liquibase Runner",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ales Loncar",
+      "email": "ales@celavi.org"
+    }
+  ],
+  "require": {
+    "silex/silex": "v1.3.5",
+    "ivoba/console-service-provider": "2.0.0"
+  },
+  "scripts": {
+    "post-install-cmd": "Celavi\\Composer\\Script::install",
+    "post-update-cmd": "Celavi\\Composer\\Script::install"
+  },
+  "autoload": {
+    "psr-4": {
+      "Celavi\\": [
+        "src/Celavi"
+      ]
+    }
+  }
+}
