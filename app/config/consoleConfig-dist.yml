@@ -1,8 +1,8 @@
-mysql:
-  db.options:
+liquibase:
+  ptions:
     dbname: mm
     user: username
     password: password
     host: localhost
-    driver: pdo_mysql
+    driver: mysql
     charset: UTF8
