@@ -10,7 +10,7 @@ try {
     // Silex Application wraps Pimple Container
     $app = new Application();
     // Parse Yaml Config File
-    $app->register(new YamlConfigServiceProvider(__DIR__.'/../../config/consoleConfig.yml'));
+    $app->register(new YamlConfigServiceProvider(__DIR__.'/../config/consoleConfig.yml'));
 
     return $app;
 } catch (RuntimeException $ex) {

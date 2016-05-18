@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="celavi" id="importData">
+        <sqlFile
+            encoding="utf8"
+            path="data.sql"
+            relativeToChangelogFile="true"
+            splitStatements="true"
+            stripComments="true"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-23">
+        <addForeignKeyConstraint baseColumnNames="salesRepEmployeeNumber" baseTableName="customers" constraintName="customers_ibfk_1" deferrable="false" initiallyDeferred="false" referencedColumnNames="employeeNumber" referencedTableName="employees"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-24">
+        <addForeignKeyConstraint baseColumnNames="reportsTo" baseTableName="employees" constraintName="employees_ibfk_1" deferrable="false" initiallyDeferred="false" referencedColumnNames="employeeNumber" referencedTableName="employees"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-25">
+        <addForeignKeyConstraint baseColumnNames="officeCode" baseTableName="employees" constraintName="employees_ibfk_2" deferrable="false" initiallyDeferred="false" referencedColumnNames="officeCode" referencedTableName="offices"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-26">
+        <addForeignKeyConstraint baseColumnNames="orderNumber" baseTableName="orderdetails" constraintName="orderdetails_ibfk_1" deferrable="false" initiallyDeferred="false" referencedColumnNames="orderNumber" referencedTableName="orders"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-27">
+        <addForeignKeyConstraint baseColumnNames="productCode" baseTableName="orderdetails" constraintName="orderdetails_ibfk_2" deferrable="false" initiallyDeferred="false" referencedColumnNames="productCode" referencedTableName="products"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-28">
+        <addForeignKeyConstraint baseColumnNames="customerNumber" baseTableName="orders" constraintName="orders_ibfk_1" deferrable="false" initiallyDeferred="false" referencedColumnNames="customerNumber" referencedTableName="customers"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-29">
+        <addForeignKeyConstraint baseColumnNames="customerNumber" baseTableName="payments" constraintName="payments_ibfk_1" deferrable="false" initiallyDeferred="false" referencedColumnNames="customerNumber" referencedTableName="customers"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-30">
+        <addForeignKeyConstraint baseColumnNames="productLine" baseTableName="products" constraintName="products_ibfk_1" deferrable="false" initiallyDeferred="false" referencedColumnNames="productLine" referencedTableName="productlines"/>
+    </changeSet>
+</databaseChangeLog>

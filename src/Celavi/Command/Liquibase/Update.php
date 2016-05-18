@@ -2,7 +2,7 @@
 
 namespace Celavi\Command\Liquibase;
 
-use Symfony\Component\Console\Command\Command;
+use Ivoba\Silex\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -44,9 +44,10 @@ EOT
             }
             $output->writeln('<info>'.$this->getDescription().'</info>'."\r\n");
             $showCommand = $input->getOption('show-command');
-            $app = $this->getApplication();
-            $runner = new Runner();
-            $runner->runUpdate();
+            $app = $this->getSilexApplication();
+            $projectPath = $this->getProjectDirectory();
+            $runner = new Runner($app['config']['liquibase'], $projectPath);
+            $runner->runUpdate($changeLogFile);
             $output = $runner->getOutput();
         } catch (\RuntimeException $ex) {
             $output->writeln('<runtime-error>'.$ex->getMessage().'</runtime-error>'."\r\n\r\n");

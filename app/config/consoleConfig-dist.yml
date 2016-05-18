@@ -1,8 +1,8 @@
 liquibase:
-  ptions:
-    dbname: mm
-    user: username
-    password: password
-    host: localhost
-    driver: mysql
-    charset: UTF8
+  dbname: classicmodels
+  user: root
+  password: password
+  host: localhost
+  port: 3306
+  driver: mysql
+  charset: UTF8

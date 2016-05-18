@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="celavi" id="1463571942200-1">
+        <createTable tableName="customers">
+            <column name="customerNumber" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customerName" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contactLastName" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contactFirstName" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="addressLine1" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="addressLine2" type="VARCHAR(50)"/>
+            <column name="city" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="VARCHAR(50)"/>
+            <column name="postalCode" type="VARCHAR(15)"/>
+            <column name="country" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salesRepEmployeeNumber" type="INT"/>
+            <column name="creditLimit" type="DOUBLE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-2">
+        <createTable tableName="employees">
+            <column name="employeeNumber" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lastName" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firstName" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="extension" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="officeCode" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reportsTo" type="INT"/>
+            <column name="jobTitle" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-3">
+        <createTable tableName="offices">
+            <column name="officeCode" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="addressLine1" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="addressLine2" type="VARCHAR(50)"/>
+            <column name="state" type="VARCHAR(50)"/>
+            <column name="country" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="postalCode" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="territory" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-4">
+        <createTable tableName="orderdetails">
+            <column name="orderNumber" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="productCode" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantityOrdered" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="priceEach" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orderLineNumber" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-5">
+        <createTable tableName="orders">
+            <column name="orderNumber" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orderDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="requiredDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shippedDate" type="date"/>
+            <column name="status" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comments" type="TEXT"/>
+            <column name="customerNumber" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-6">
+        <createTable tableName="payments">
+            <column name="customerNumber" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="checkNumber" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="paymentDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-7">
+        <createTable tableName="productlines">
+            <column name="productLine" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="textDescription" type="VARCHAR(4000)"/>
+            <column name="htmlDescription" type="MEDIUMTEXT"/>
+            <column name="image" type="MEDIUMBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-8">
+        <createTable tableName="products">
+            <column name="productCode" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="productName" type="VARCHAR(70)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="productLine" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="productScale" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="productVendor" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="productDescription" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantityInStock" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="buyPrice" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MSRP" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-9">
+        <addPrimaryKey columnNames="customerNumber" constraintName="PRIMARY" tableName="customers"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-10">
+        <addPrimaryKey columnNames="employeeNumber" constraintName="PRIMARY" tableName="employees"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-11">
+        <addPrimaryKey columnNames="officeCode" constraintName="PRIMARY" tableName="offices"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-12">
+        <addPrimaryKey columnNames="orderNumber, productCode" constraintName="PRIMARY" tableName="orderdetails"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-13">
+        <addPrimaryKey columnNames="orderNumber" constraintName="PRIMARY" tableName="orders"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-14">
+        <addPrimaryKey columnNames="customerNumber, checkNumber" constraintName="PRIMARY" tableName="payments"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-15">
+        <addPrimaryKey columnNames="productLine" constraintName="PRIMARY" tableName="productlines"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-16">
+        <addPrimaryKey columnNames="productCode" constraintName="PRIMARY" tableName="products"/>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-17">
+        <createIndex indexName="customerNumber" tableName="orders">
+            <column name="customerNumber"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-18">
+        <createIndex indexName="officeCode" tableName="employees">
+            <column name="officeCode"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-19">
+        <createIndex indexName="productCode" tableName="orderdetails">
+            <column name="productCode"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-20">
+        <createIndex indexName="productLine" tableName="products">
+            <column name="productLine"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-21">
+        <createIndex indexName="reportsTo" tableName="employees">
+            <column name="reportsTo"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="celavi" id="1463571942200-22">
+        <createIndex indexName="salesRepEmployeeNumber" tableName="customers">
+            <column name="salesRepEmployeeNumber"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
