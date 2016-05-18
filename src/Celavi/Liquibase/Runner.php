@@ -19,7 +19,7 @@ class Runner
     private $params = array();
 
     /**
-     * @var strings
+     * @var string
      */
     private $projectPath = '';
 
@@ -72,70 +72,67 @@ class Runner
             $command .= ' --password='.$params['password'];
         }
 
-		return $command;
+        return $command;
     }
 
     /**
      * @param string $driver
-     *
      * @return string
-     *
      * @throws \Celavi\Exception\RuntimeException
      */
     private function getJdbcDriverName($driver)
     {
-        switch($driver) {
+        switch ($driver) {
             case 'pdo_mysql':
             case 'mysql':
-				return "com.mysql.jdbc.Driver";
+                return "com.mysql.jdbc.Driver";
             default:
-				throw new RuntimeException("Database driver class name for '$driver' not supported!");
+                throw new RuntimeException("Database driver class name for '$driver' not supported!");
         }
     }
 
     /**
-	 * @param string $driver
-	 * @return string
-	 * @throws Celavi\Exception\RuntimeException
-	 */
-	private function getJdbcDriverClassPath($driver)
+     * @param string $driver
+     * @return string
+     * @throws \Celavi\Exception\RuntimeException
+     */
+    private function getJdbcDriverClassPath($driver)
     {
-        switch($driver) {
+        switch ($driver) {
             case 'pdo_mysql':
             case 'mysql':
-				return $this->projectPath . self::JDBC_MYSQL;
+                return $this->projectPath . self::JDBC_MYSQL;
             default:
-				throw new RuntimeException("Classpath containing JDBC Driver '$driver' not found!");
+                throw new RuntimeException("Classpath containing JDBC Driver '$driver' not found!");
         }
     }
 
     /**
-	 * @param array $params
-	 * @return string
-	 * @throws Celavi\Exception\RuntimeException
-	 */
-	private function getJdbcDsn($params)
+     * @param array $params
+     * @return string
+     * @throws \Celavi\Exception\RuntimeException
+     */
+    private function getJdbcDsn($params)
     {
-        switch($params['driver']) {
+        switch ($params['driver']) {
             case 'pdo_mysql':
-			case 'mysql':
-				return $this->getMysqlJdbcDsn($params);
+            case 'mysql':
+                return $this->getMysqlJdbcDsn($params);
             default:
-				throw new RuntimeException("Database JDBC '" . $params['driver'] . "'not supported!");
+                throw new RuntimeException("Database JDBC '" . $params['driver'] . "'not supported!");
         }
     }
 
     /**
-	 * @param array $params
-	 * @return string
-	 */
-	private function getMysqlJdbcDsn($params)
+     * @param array $params
+     * @return string
+     */
+    private function getMysqlJdbcDsn($params)
     {
         $dsn = "jdbc:mysql://";
         if ($params['host'] != "") {
             $dsn .= $params['host'];
-        }
-        else {
+        } else {
             $dsn .= 'localhost';
         }
         if ($params['port'] != "") {
@@ -144,7 +141,7 @@ class Runner
         $dsn .= "/".$params['dbname'];
         $dsn .='?createDatabaseIfNotExist=true';
         if ($params['charset'] == 'UTF8') {
-                $dsn .= "&useUnicode=true&characterEncoding=UTF-8";
+            $dsn .= "&useUnicode=true&characterEncoding=UTF-8";
         }
         return $dsn;
     }
