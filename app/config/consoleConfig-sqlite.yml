@@ -1,0 +1,4 @@
+liquibase:
+  dbname: /var/db/chinook.sqlite
+  host: localhost
+  driver: sqlite

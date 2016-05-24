@@ -15,5 +15,6 @@
 * rollback <tag>
 * rollbackSQL
 
-# Add screenshots or text
-* Classic models database compare http://www.mysqltutorial.org/mysql-sample-database.aspx
+# Database examples
+* MySQL: The [classicmodels](http://www.mysqltutorial.org/mysql-sample-database.aspx) database is a retailer of scale models of classic cars database. 
+* Sqlite: [Chinook](http://www.sqlitetutorial.net/sqlite-sample-database/) sample database.

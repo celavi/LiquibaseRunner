@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.4] - 2016-05-24
+### Added
+* Sqlite connector sqlite-jdbc-3.8.11.2.jar
+* sqlite chinook sample database
+
+### Changed
+* consoleconfig examples for mysql and sqlite driver
+
 ## [0.0.3] - 2016-05-24
 ### Added
 * Database Update Commands: update, updateSQL

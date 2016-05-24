@@ -3,7 +3,7 @@
     <changeSet author="celavi" id="importData">
         <sqlFile
             encoding="utf8"
-            path="data.sql"
+            path="../data.sql"
             relativeToChangelogFile="true"
             splitStatements="true"
             stripComments="true"/>

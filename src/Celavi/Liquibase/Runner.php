@@ -12,6 +12,7 @@ class Runner
 {
     const LIQUIBASE = '/src/Celavi/Liquibase/vendor/liquibase-3.4.2.jar';
     const JDBC_MYSQL = '/src/Celavi/Liquibase/vendor/lib/mysql-connector-java-5.1.39-bin.jar';
+    const JDBC_SQLITE = '/src/Celavi/Liquibase/vendor/lib/sqlite-jdbc-3.8.11.2.jar';
     const SNAKE_YAML = '/src/Celavi/Liquibase/vendor/lib/snakeyaml-1.13.jar';
 
     /**
@@ -45,7 +46,7 @@ class Runner
     /**
      *
      * @param string $commandName
-	 * @param string $changeLogFile
+     * @param string $changeLogFile
      */
     public function runUpdateCommands($commandName, $changeLogFile)
     {
@@ -104,11 +105,11 @@ class Runner
             ' --classpath='.$this->getJdbcDriverClassPath($params['driver']).
             ' --url="'.$this->getJdbcDsn($params).'"';
 
-        if ($params['user'] != "") {
+        if (array_key_exists('user', $params) && $params['user'] != "") {
             $command .= ' --username='.$params['user'];
         }
 
-        if ($params['password'] != "") {
+        if (array_key_exists('password', $params) && $params['password'] != "") {
             $command .= ' --password='.$params['password'];
         }
 
@@ -125,7 +126,9 @@ class Runner
         switch ($driver) {
             case 'pdo_mysql':
             case 'mysql':
-                return "com.mysql.jdbc.Driver";
+                return 'com.mysql.jdbc.Driver';
+            case 'sqlite':
+                return 'org.sqlite.JDBC';
             default:
                 throw new RuntimeException("Database driver class name for '$driver' not supported!");
         }
@@ -142,6 +145,8 @@ class Runner
             case 'pdo_mysql':
             case 'mysql':
                 return $this->projectPath . self::JDBC_MYSQL;
+            case 'sqlite':
+                return $this->projectPath . self::JDBC_SQLITE;
             default:
                 throw new RuntimeException("Classpath containing JDBC Driver '$driver' not found!");
         }
@@ -158,6 +163,8 @@ class Runner
             case 'pdo_mysql':
             case 'mysql':
                 return $this->getMysqlJdbcDsn($params);
+            case 'sqlite':
+                return $this->getSqliteJdbcDsn($params);
             default:
                 throw new RuntimeException("Database JDBC '" . $params['driver'] . "'not supported!");
         }
@@ -183,6 +190,18 @@ class Runner
         if ($params['charset'] == 'UTF8') {
             $dsn .= "&useUnicode=true&characterEncoding=UTF-8";
         }
+        return $dsn;
+    }
+    
+    /**
+     * 
+     * @param array $params
+     * @return string
+     */
+    private function getSqliteJdbcDsn($params)
+    {
+        $dsn = "jdbc:sqlite:";
+        $dsn .= $this->projectPath . $params['dbname'];
         return $dsn;
     }
 
