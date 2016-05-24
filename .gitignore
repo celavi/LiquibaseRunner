@@ -33,3 +33,7 @@ composer.lock
 
 ### JetBrains ###
 .idea/
+
+### NetBeans ###
+/nbproject/
+/nbproject/private/

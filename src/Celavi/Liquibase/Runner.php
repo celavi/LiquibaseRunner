@@ -4,6 +4,7 @@ namespace Celavi\Liquibase;
 
 use Celavi\Tool\Platform;
 use Celavi\Exception\RuntimeException;
+use Celavi\Exception\DomainException;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
@@ -22,6 +23,17 @@ class Runner
      * @var string
      */
     private $projectPath = '';
+    
+    /**
+     * @var string
+     */
+    private $output = '';
+        
+    /**
+     *
+     * @var string 
+     */
+    private $runCommand = '';
 
     public function __construct($params, $projectPath)
     {
@@ -32,14 +44,37 @@ class Runner
 
     /**
      *
-     * @param string $changeLogFile
+     * @param string $commandName
+	 * @param string $changeLogFile
      */
-    public function runUpdate($changeLogFile)
+    public function runUpdateCommands($commandName, $changeLogFile)
     {
         $this->checkChangeLog($changeLogFile);
         $command = $this->getBaseCommand();
         $command .= ' --changeLogFile=' . $this->projectPath . $changeLogFile;
-        $command .= ' update';
+        $command .= " $commandName";
+        $this->runCommand = $command;
+        $this->run();
+    }
+    
+    /**
+     * Runs current command
+     * 
+     * @throws DomainException
+     */
+    private function run()
+    {
+        $process = new Process($this->runCommand);
+        try {
+            $process->mustRun();
+
+            $this->output = $process->getOutput();
+            if (strlen($this->output) == 0) {
+                $this->output = $process->getErrorOutput();
+            }
+        } catch (ProcessFailedException $e) {
+            throw new DomainException($process->getErrorOutput());
+        }
     }
 
     /**
@@ -54,6 +89,11 @@ class Runner
         }
     }
 
+    /**
+     * Combines Base Liquibase command
+     * 
+     * @return string
+     */
     protected function getBaseCommand()
     {
         $params = $this->params;
@@ -146,8 +186,24 @@ class Runner
         return $dsn;
     }
 
+    /**
+     * Output from run command
+     * 
+     * @return string
+     */
     public function getOutput()
     {
+        return $this->output;
+    }
+        
+    /**
+     * Return Run Command as string
+     * 
+     * @return string
+     */
+    public function getRunCommand()
+    {
+        return $this->runCommand;
     }
 
     /**
@@ -164,14 +220,10 @@ class Runner
         }
 
         $process = new Process($command);
-        try {
-            $process->mustRun();
-            $output = $process->getOutput();
-            if (strlen($output) == 0) {
-                throw new RuntimeException('Java is not installed - aborting!');
-            }
-        } catch (ProcessFailedException $ex) {
-            throw new RuntimeException($ex->getMessage());
+        $process->run();
+        $output = $process->getOutput();
+        if (strlen($output) == 0) {
+            throw new RuntimeException('Java is not installed - aborting!');
         }
     }
 }

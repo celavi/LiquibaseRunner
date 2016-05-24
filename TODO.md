@@ -4,7 +4,16 @@
 * Report problem to Liquibase
 
 # Liquibase commands
-* version java -jar C:\Users\u106803\Projects\LiquibaseRunner\bin/../src/Celavi/Liquibase/vendor/liquibase-3.4.2.jar --version
+
+## Maintenance Commands
+* version
+* tag <tag>
+* tagExists <tag>
+* validate
+
+## Database Rollback Commands
+* rollback <tag>
+* rollbackSQL
 
 # Add screenshots or text
 * Classic models database compare http://www.mysqltutorial.org/mysql-sample-database.aspx
